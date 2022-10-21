@@ -9,7 +9,7 @@ const ConflictError = require('../errors/conflict-error');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { email, password, name } = req.body;
   User.findOne({ email })
     .then((user) => {
       if (user) {
@@ -20,7 +20,7 @@ const createUser = (req, res, next) => {
         return bcrypt.hash(password, 10);
       }
     })
-    .then((hash) => User.create({ name, email, password: hash }))
+    .then((hash) => User.create({ email, password: hash, name }))
     .then((user) => res.status(201).send({ _id: user._id, email: user.email }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
