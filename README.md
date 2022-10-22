@@ -26,4 +26,4 @@
 
 - Run the tests on PORT=3000 by command "npm run dev" and connecting the request to mongo compass that run on localhost:27017/explorerdb.
 
-- [api link](https://news-explorer-racheli.students.nomoredomainssbs.ru/)
+- [api link](https://api.news-explorer-racheli.students.nomoredomainssbs.ru/)

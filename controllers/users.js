@@ -50,13 +50,12 @@ const login = (req, res, next) => {
 };
 
 const getCurrentUser = (req, res, next) => {
-  const { user } = req;
-  User.findById(user)
+  User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('No user found with this Id');
       } else {
-        return res.status(200).send({ user });
+        return res.status(200).send(user);
       }
     })
     .catch(next);

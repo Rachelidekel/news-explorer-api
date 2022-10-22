@@ -22,7 +22,7 @@ const auth = (req, res, next) => {
     return next(new UnauthorizedError('Authorization Required'));
   }
 
-  req.user = payload._id;
+  req.user = payload;
 
   return next();
 };

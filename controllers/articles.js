@@ -31,13 +31,13 @@ const createArticle = (req, res, next) => {
 };
 
 const deleteArticle = (req, res, next) => {
-  const { id } = req.params;
-  Article.findById(id)
+  const { articleId } = req.params;
+  Article.findById(articleId)
     .orFail(() => {
       throw new NotFoundError('No article found with that id');
     })
     .then((article) => {
-      if (!article.owner.equals(req.user)) {
+      if (!article.owner.equals(req.user._id)) {
         next(new ForbiddenError("You cannot delete someone else's article"));
       } else {
         Article.deleteOne(article).then(() => res.send(article));
